@@ -17,8 +17,9 @@ class Auth extends CI_Controller {
 			$check_auth_client = $this->MyModel->check_auth_client();
 			
 			if($check_auth_client == true){
+
+
 				$params = $_REQUEST;
-		        
 		        $username = $params['username'];
 		        $password = $params['password'];
 

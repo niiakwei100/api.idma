@@ -21,8 +21,12 @@ class Authenticate extends CI_Controller {
                 die('Direct Access Not Allowed!!');
 	        }
 	    }
+
 	    $this->load->library('ts_functions');
         $this->theme = $this->ts_functions->current_theme();
+
+        //we need to load the rest model
+        $this->load->model('MyModel', 'rest');
 	}
 
 	public function index()
@@ -30,8 +34,12 @@ class Authenticate extends CI_Controller {
 		redirect(base_url().'authenticate/login');
 	}
 
-	// Login page
-	public function login($key='')
+
+
+
+	// Login page 
+    //here the code needs to be modified for rest
+	public function login($key='')//key is defined as empty
 	{
 	    if($key != '') {
 	        $res = $this->DatabaseModel->access_database('ts_user','select','',array('user_key'=>$key,'user_status'=>2));
@@ -46,6 +54,10 @@ class Authenticate extends CI_Controller {
 	    else {
 	        $data['invalidAccess'] = 2;
 	    }
+
+
+
+
 		$data['basepath'] = base_url();
 		$data['name_of_page'] = 'login';
 
@@ -53,6 +65,10 @@ class Authenticate extends CI_Controller {
 		$this->load->view('themes/'.$this->theme.'/home/authenticate/login',$data);
 		$this->load->view('themes/'.$this->theme.'/home/authenticate/common_footer',$data);
 	}
+
+
+
+
 
     // Register page
     public function register()
@@ -63,6 +79,11 @@ class Authenticate extends CI_Controller {
 		$this->load->view('themes/'.$this->theme.'/home/authenticate/register',$data);
 		$this->load->view('themes/'.$this->theme.'/home/authenticate/common_footer',$data);
 	}
+
+
+
+
+
 
 	// Registeration section / Login p
 	function getuserin_section() {

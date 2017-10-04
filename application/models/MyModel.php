@@ -6,6 +6,9 @@ class MyModel extends CI_Model {
     var $client_service = "frontend-client";
     var $auth_key       = "simplerestapi";
     var $content_type = 'application/x-www-form-urlencoded';
+
+
+    //here we check for headers
     public function check_auth_client(){
 
         $client_service = $this->input->get_request_header('Client-Service', TRUE);
@@ -25,7 +28,7 @@ class MyModel extends CI_Model {
 
         //db ts_user 
         //db username is plain 
-        //db password is encrypted
+        //db password is encrypted  
 
         //this is  running through the original db for rest 
         $q  = $this->db->select('password,id')->from('users')->where('username',$username)->get()->row();
@@ -60,6 +63,13 @@ class MyModel extends CI_Model {
                return array('status' => 204,'message' => 'Wrong password.');
             }
         }
+    }
+
+
+    //here we call the rest login seperately
+    public function rest_login()
+    {
+
     }
 
     public function logout()
