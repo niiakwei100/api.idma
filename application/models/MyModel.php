@@ -23,7 +23,7 @@ class MyModel extends CI_Model {
     }
 
 
-    public function login($username,$password)
+    public function login($username, $password)
     {
 
         //db ts_user 
